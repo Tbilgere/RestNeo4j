@@ -16,6 +16,9 @@ public class ApplicationProps {
 	@Value("${sql.query.movie}")
 	private String sqlQueryMovie;
 
+	@Value("${sql.query.directorMovies}")
+	private String sqlQueryDirectorMovies;
+
 	public String getNeoUrl() {
 		return neoUrl;
 	}
@@ -30,6 +33,10 @@ public class ApplicationProps {
 
 	public String getSqlQueryMovie() {
 		return sqlQueryMovie;
+	}
+
+	public String getSqlQueryDirectorMovies() {
+		return sqlQueryDirectorMovies;
 	}
 
 }

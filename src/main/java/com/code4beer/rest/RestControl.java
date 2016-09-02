@@ -1,5 +1,7 @@
 package com.code4beer.rest;
 
+import java.util.ArrayList;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,20 +18,26 @@ public class RestControl {
 	private NeoDao dao;
 
 	public RestControl(NeoDao neoDao) {
+		log.info("Building RestControl Class");
 		this.dao = neoDao;
 	}
 
 	@RequestMapping("/neo")
 	public String neo(@RequestParam(value = "name", defaultValue = "4j") String name) {
-		log.info("logged");
 		return "neo" + name;
 	}
 
 	@RequestMapping("/movie")
-	public String movie(@RequestParam(value= "name", defaultValue = "Cloud Atlas") String name) {
-		log.info("Movie");
-		String result = dao.movie(name);
-		return result;
+	public Content movie(@RequestParam(value = "name", defaultValue = "Cloud Atlas") String name) {
+		Object result = dao.movieDirector(name);
+		return new Content(result);
+	}
+
+	@RequestMapping("/movieDirector")
+	public Content movieMaker(@RequestParam(value = "name") String name) {
+		ArrayList<String> result = new ArrayList<String>();
+		result = dao.movieDirectorMovies(name);
+		return new Content(result);
 	}
 
 }

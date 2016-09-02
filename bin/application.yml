@@ -13,6 +13,7 @@ neo:
 sql:
   query:
     movie: "MATCH (film {title: {1}})<-[:DIRECTED]-(directors) RETURN directors.name"
+    directorMovies: "MATCH (director {name: {1}})-[:DIRECTED]->(films) RETURN films.title"
 ---
 spring:
   profiles: dev
@@ -25,4 +26,5 @@ neo:
 sql:
   query:
     movie: "MATCH (film {title: {1}})<-[:DIRECTED]-(directors) RETURN directors.name" 
+    directorMovies: "MATCH (director {name: {1}})-[:DIRECTED]->(films) RETURN films.title"
 ---
